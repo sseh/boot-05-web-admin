@@ -1,6 +1,7 @@
 package com.trachoma.boot.controller;
 
 import com.trachoma.boot.bean.User;
+import com.trachoma.boot.exception.UserTooManyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,16 +18,22 @@ public class TableController {
 
     @GetMapping("/basic_table")
     public String basic_table() {
+        int i = 10 / 0;
         return "table/basic_table";
     }
 
     @GetMapping("/dynamic_table")
     public String dynamic_table(Model model) {
+
         List<User> users = Arrays.asList(new User("zhangsan", "1231231"),
                 new User("lisi", "123123"),
                 new User("haha", "1312312"),
                 new User("hehe", "1312"));
         model.addAttribute("users", users);
+
+        if (users.size() > 3) {
+            throw new UserTooManyException();
+        }
         return "table/dynamic_table";
     }
 
