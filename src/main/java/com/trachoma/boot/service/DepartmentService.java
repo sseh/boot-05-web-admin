@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
  * @author Administrator
  * @create 2022-02-22 21:49
  */
-@Service
 public interface DepartmentService {
 
     public Department getDeptById(Integer id);

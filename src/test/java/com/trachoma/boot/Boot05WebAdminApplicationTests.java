@@ -1,5 +1,7 @@
 package com.trachoma.boot;
 
+import com.trachoma.boot.bean.User;
+import com.trachoma.boot.mapper.UserMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +20,21 @@ class Boot05WebAdminApplicationTests {
     @Autowired
     public DataSource dataSource;
 
+    @Autowired
+    public UserMapper userMapper;
+
     @Test
     void contextLoads() {
 
         Integer integer = jdbcTemplate.queryForObject("select count(*) from emp", Integer.class);
         log.info("emp表中有{}条数据", integer);
         log.info("数据源是: {}", dataSource.getClass());
+    }
+
+    @Test
+    void testUserMapper() {
+        User user = userMapper.selectById(1L);
+        log.info("用户信息：{}", user);
     }
 
 }
