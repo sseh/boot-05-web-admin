@@ -18,7 +18,8 @@ import java.util.Arrays;
  * @author trachoma
  * @create 2022-02-21 17:16
  */
-@Configuration
+@Deprecated
+//@Configuration
 public class MyDataSourceConfig {
 
     @ConfigurationProperties("spring.datasource")
@@ -58,4 +59,6 @@ public class MyDataSourceConfig {
         registrationBean.addInitParameter("exclusions", "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*");
         return registrationBean;
     }
+
+
 }

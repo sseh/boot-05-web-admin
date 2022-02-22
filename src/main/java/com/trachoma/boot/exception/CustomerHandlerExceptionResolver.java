@@ -15,7 +15,7 @@ import java.io.IOException;
  * @create 2022-02-21 14:00
  */
 @Order(value = Ordered.HIGHEST_PRECEDENCE)
-@Component
+//@Component
 public class CustomerHandlerExceptionResolver implements HandlerExceptionResolver {
     @Override
     public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {

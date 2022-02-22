@@ -4,8 +4,33 @@ spring:
     username: root
     password: Trachoma
     driver-class-name: com.mysql.cj.jdbc.Driver
-    filters: stat,wall
+
+    druid:
+      stat-view-servlet:
+        enabled: true
+        login-username: admin
+        login-password: admin
+        reset-enable: false
+      web-stat-filter:
+        enabled: true
+        url-pattern: /*
+        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
+      filters: stat,wall,slf4j
+      filter:
+        stat:
+          slow-sql-millis: 1000
+          log-slow-sql: true
+        wall:
+          enabled: true
+      aop-patterns: com.trachoma.boot.*
+
   jdbc:
     template:
       query-timeout: 3
 #    type: com.zaxxer.hikari.HikariDataSource
+
+mybatis:
+#  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true

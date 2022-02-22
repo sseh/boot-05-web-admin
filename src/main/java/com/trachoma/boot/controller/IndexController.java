@@ -1,7 +1,11 @@
 package com.trachoma.boot.controller;
 
-import com.sun.org.apache.bcel.internal.generic.IFNONNULL;
+import com.trachoma.boot.bean.Department;
+import com.trachoma.boot.bean.Employee;
 import com.trachoma.boot.bean.User;
+import com.trachoma.boot.service.DepartmentService;
+import com.trachoma.boot.service.EmployeeService;
+import com.trachoma.boot.service.impl.EmployeeServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -10,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
@@ -21,6 +26,31 @@ import javax.servlet.http.HttpSession;
 @Slf4j
 @Controller
 public class IndexController {
+
+    @Autowired
+    public EmployeeService employeeService;
+
+    @Autowired
+    public DepartmentService departmentService;
+
+    @ResponseBody
+    @PostMapping("/dept")
+    public Department saveDept(Department department) {
+        departmentService.saveDept(department);
+        return department;
+    }
+
+    @ResponseBody
+    @GetMapping("/emp")
+    public Employee getById(@RequestParam Integer empno) {
+        return employeeService.getEmpById(empno);
+    }
+
+    @ResponseBody
+    @GetMapping("/dept")
+    public Department getDeptById(@RequestParam Integer deptno) {
+        return departmentService.getDeptById(deptno);
+    }
 
     @Autowired
     public JdbcTemplate jdbcTemplate;
