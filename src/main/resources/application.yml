@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/temp?characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: Trachoma
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    filters: stat,wall
+  jdbc:
+    template:
+      query-timeout: 3
+#    type: com.zaxxer.hikari.HikariDataSource

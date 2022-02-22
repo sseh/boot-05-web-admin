@@ -3,11 +3,14 @@ package com.trachoma.boot.controller;
 import com.sun.org.apache.bcel.internal.generic.IFNONNULL;
 import com.trachoma.boot.bean.User;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 
@@ -18,6 +21,16 @@ import javax.servlet.http.HttpSession;
 @Slf4j
 @Controller
 public class IndexController {
+
+    @Autowired
+    public JdbcTemplate jdbcTemplate;
+
+    @ResponseBody
+    @GetMapping("/sql")
+    public String queryFromEmp(){
+        String string = jdbcTemplate.queryForObject("select count(*) from emp", String.class);
+        return string;
+    }
 
     @GetMapping(value = {"/", "login"})
     public String loginPage() {
