@@ -2,7 +2,6 @@ package com.trachoma.boot.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.trachoma.boot.bean.User;
-import com.trachoma.boot.exception.UserTooManyException;
 import com.trachoma.boot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -56,11 +54,6 @@ public class TableController {
         List<User> userList = userService.list();
         Page<User> userPage = new Page<>(pageNo, 2);
         Page<User> page = userService.page(userPage, null);
-        long pages = page.getPages();
-        long size = page.getSize();
-        long current = page.getCurrent();
-        List<User> records = page.getRecords();
-        long total = page.getTotal();
 //        model.addAttribute("users", userList);
         model.addAttribute("page", page);
         return "table/dynamic_table";

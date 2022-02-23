@@ -8,6 +8,8 @@ import com.trachoma.boot.service.EmployeeService;
 import com.trachoma.boot.service.impl.EmployeeServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +34,9 @@ public class IndexController {
 
     @Autowired
     public DepartmentService departmentService;
+
+//    @Autowired
+    public StringRedisTemplate redisTemplate;
 
     @ResponseBody
     @PostMapping("/dept")
@@ -88,7 +93,13 @@ public class IndexController {
 //            model.addAttribute("msg", "请重新登录");
 //            return "login";
 //        }
-
+//        ValueOperations<String, String> operations = redisTemplate.opsForValue();
+//        String s = operations.get("/index.html");
+//        String s1 = operations.get("/sql");
+//        model.addAttribute("indexCount", s);
+//        model.addAttribute("sqlCount", s1);
+        model.addAttribute("indexCount", 1);
+        model.addAttribute("sqlCount", 1);
         return "index";
     }
 }

@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: boot-05-web-admin
   datasource:
     url: jdbc:mysql://localhost:3306/temp?characterEncoding=UTF-8&useSSL=false
     username: root
@@ -27,6 +29,43 @@ spring:
   jdbc:
     template:
       query-timeout: 3
+
+
+  boot:
+    admin:
+      client:
+        url: http://localhost:8888
+        instance:
+          prefer-ip: true
+management:
+  info:
+    env:
+      enabled: true
+  endpoints:
+    enabled-by-default: true
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+      enabled: true
+    info:
+      enabled: true
+    beans:
+      enabled: true
+    metrics:
+      enabled: true
+  redis:
+    host: r-2zesr25g5wt4b7k0q1pd.redis.rds.aliyuncs.com
+    port: 6379
+    password: trachoma:Aliyun1024
+    client-type: jedis
+    jedis:
+      pool:
+        max-active: 10
+#    url: redis://Aliyun1024@r-2zesr25g5wt4b7k0q1pd.redis.rds.aliyuncs.com:6379
+
 #    type: com.zaxxer.hikari.HikariDataSource
 
 mybatis:
@@ -34,3 +73,9 @@ mybatis:
   mapper-locations: classpath:mybatis/mapper/*.xml
   configuration:
     map-underscore-to-camel-case: true
+info:
+  appName: boot-admin
+  version: 2.0.1
+  mavenProjectName: @project.artifactId@  #使用@@可以获取maven的pom文件值
+  mavenProjectVersion: @project.version@
+
